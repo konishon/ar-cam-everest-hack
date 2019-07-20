@@ -14,7 +14,6 @@ import timber.log.Timber;
 
 public class CompassActivity extends AppCompatActivity {
 
-    private static final String TAG = "CompassActivity";
 
     private Compass compass;
     private ImageView arrowView;

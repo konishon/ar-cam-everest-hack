@@ -6,9 +6,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import np.com.naxa.dms.ar.LocationActivity;
+import np.com.naxa.dms.ar.ARCompassActivity;
+import np.com.naxa.dms.ar.ARLocationActivity;
 import np.com.naxa.dms.compass.CompassActivity;
-import np.com.naxa.dms.navigate.ShareLocationActivity;
+import np.com.naxa.dms.navigate.CustomBearingCompassActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,14 +27,20 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_location_compass).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ShareLocationActivity.class));
+                startActivity(new Intent(MainActivity.this, CustomBearingCompassActivity.class));
             }
         });
 
         findViewById(R.id.btn_ar_camera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LocationActivity.class));
+                startActivity(new Intent(MainActivity.this, ARLocationActivity.class));
+            }
+        });
+        findViewById(R.id.btn_ar_camera_with_compass).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ARCompassActivity.class));
             }
         });
     }

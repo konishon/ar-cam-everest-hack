@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ar.LocationActivity">
+    tools:context=".ar.ARLocationActivity">
 
     <com.google.ar.sceneform.ArSceneView
         android:id="@+id/ar_scene_view"
@@ -20,5 +20,55 @@
         android:contentDescription="@string/compass_hands"
         android:scaleType="fitXY"
         android:src="@drawable/hands" />
+
+
+    <LinearLayout
+        android:id="@+id/wrapper_lat_lon"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="lat lon" />
+
+        <TextView
+            android:id="@+id/text_curr_latlng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textStyle="italic|bold" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@id/wrapper_lat_lon"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="distance" />
+
+        <TextView
+            android:id="@+id/text_curr_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textStyle="italic|bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sotw_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
