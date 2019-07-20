@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import np.com.naxa.dms.ar.LocationActivity;
+import np.com.naxa.dms.ar.ARMarkerActivity;
 import np.com.naxa.dms.compass.CompassActivity;
 import np.com.naxa.dms.navigate.ShareLocationActivity;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_ar_camera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LocationActivity.class));
+                startActivity(new Intent(MainActivity.this, ARMarkerActivity.class));
             }
         });
     }

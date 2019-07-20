@@ -15,7 +15,6 @@
  */
 package np.com.naxa.dms.ar;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import android.view.View;
@@ -34,7 +33,6 @@ import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableException;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.FrameTime;
-import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ViewRenderable;
@@ -46,7 +44,6 @@ import java.util.concurrent.ExecutionException;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import np.com.naxa.dms.R;
 import timber.log.Timber;
@@ -57,7 +54,7 @@ import uk.co.appoly.arcorelocation.utils.ARLocationPermissionHelper;
  * This is a simple example that shows how to create an augmented reality (AR) application using the
  * ARCore and Sceneform APIs.
  */
-public class LocationActivity extends AppCompatActivity {
+public class ARMarkerActivity extends AppCompatActivity {
     private boolean installRequested;
     private boolean hasFinishedLoading = false;
 
@@ -124,7 +121,7 @@ public class LocationActivity extends AppCompatActivity {
                         if (locationScene == null) {
                             // If our locationScene object hasn't been setup yet, this is a good time to do it
                             // We know that here, the AR components have been initiated.
-                            locationScene = new LocationScene(LocationActivity.this, arSceneView);
+                            locationScene = new LocationScene(ARMarkerActivity.this, arSceneView);
 
                             Disposable disposable = Observable.fromCallable(new Callable<ArrayList<PointOfInterest>>() {
                                 @Override
@@ -133,7 +130,7 @@ public class LocationActivity extends AppCompatActivity {
                                 }
                             }).flatMapIterable((Function<ArrayList<PointOfInterest>, Iterable<PointOfInterest>>) pointOfInterests -> pointOfInterests)
                                     .subscribe(pointOfInterest -> {
-                                        Marker.render(LocationActivity.this, pointOfInterest, locationScene);
+                                        Marker.render(ARMarkerActivity.this, pointOfInterest, locationScene);
 //
                                     }, throwable -> Timber.e(throwable));
 
@@ -168,57 +165,7 @@ public class LocationActivity extends AppCompatActivity {
         ARLocationPermissionHelper.requestPermission(this);
     }
 
-    private int[] mapDistanceToHeightWidht(int distance) {
-        int[] heightWidht = new int[2];
-        if (distance <= 50) {
-            heightWidht[0] = 394;
-            heightWidht[1] = 394;
 
-        } else if (distance <= 150) {
-            heightWidht[0] = 344;
-            heightWidht[1] = 344;
-
-        } else if (distance <= 250) {
-            heightWidht[0] = 294;
-            heightWidht[1] = 294;
-
-        } else if (distance <= 350) {
-            heightWidht[0] = 244;
-            heightWidht[1] = 244;
-
-        } else if (distance <= 450) {
-            heightWidht[0] = 194;
-            heightWidht[1] = 194;
-
-        } else {
-            heightWidht[0] = 144;
-            heightWidht[1] = 144;
-        }
-        return heightWidht;
-    }
-
-
-    /**
-     * Example node of a layout
-     *
-     * @return
-     */
-    private Node getExampleView() {
-        Node base = new Node();
-        base.setRenderable(exampleLayoutRenderable);
-
-        Context c = this;
-        // Add  listeners etc here
-        View eView = exampleLayoutRenderable.getView();
-        eView.setOnTouchListener((v, event) -> {
-            Toast.makeText(
-                    c, "Location marker touched.", Toast.LENGTH_LONG)
-                    .show();
-            return false;
-        });
-
-        return base;
-    }
 
 
     /**
@@ -322,7 +269,7 @@ public class LocationActivity extends AppCompatActivity {
 
         loadingMessageSnackbar =
                 Snackbar.make(
-                        LocationActivity.this.findViewById(android.R.id.content),
+                        ARMarkerActivity.this.findViewById(android.R.id.content),
                         R.string.plane_finding,
                         Snackbar.LENGTH_INDEFINITE);
         loadingMessageSnackbar.getView().setBackgroundColor(0xbf323232);

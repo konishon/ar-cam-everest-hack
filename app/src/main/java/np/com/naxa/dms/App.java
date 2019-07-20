@@ -1,8 +1,9 @@
 package np.com.naxa.dms;
 
 
-
 import android.app.Application;
+
+import org.osmdroid.config.Configuration;
 
 import np.com.naxa.dms.di.component.AppComponent;
 import np.com.naxa.dms.di.component.DaggerAppComponent;
@@ -23,6 +24,8 @@ public class App extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
+
     }
 
     public AppComponent getAppComponent() {
