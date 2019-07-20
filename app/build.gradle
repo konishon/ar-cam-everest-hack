@@ -39,8 +39,8 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.21'
 
 
-
-
+    implementation 'org.osmdroid:osmdroid-android:5.6.4'
+    implementation 'com.github.MKergall:osmbonuspack:6.6.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

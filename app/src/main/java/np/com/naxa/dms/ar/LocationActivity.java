@@ -168,57 +168,7 @@ public class LocationActivity extends AppCompatActivity {
         ARLocationPermissionHelper.requestPermission(this);
     }
 
-    private int[] mapDistanceToHeightWidht(int distance) {
-        int[] heightWidht = new int[2];
-        if (distance <= 50) {
-            heightWidht[0] = 394;
-            heightWidht[1] = 394;
 
-        } else if (distance <= 150) {
-            heightWidht[0] = 344;
-            heightWidht[1] = 344;
-
-        } else if (distance <= 250) {
-            heightWidht[0] = 294;
-            heightWidht[1] = 294;
-
-        } else if (distance <= 350) {
-            heightWidht[0] = 244;
-            heightWidht[1] = 244;
-
-        } else if (distance <= 450) {
-            heightWidht[0] = 194;
-            heightWidht[1] = 194;
-
-        } else {
-            heightWidht[0] = 144;
-            heightWidht[1] = 144;
-        }
-        return heightWidht;
-    }
-
-
-    /**
-     * Example node of a layout
-     *
-     * @return
-     */
-    private Node getExampleView() {
-        Node base = new Node();
-        base.setRenderable(exampleLayoutRenderable);
-
-        Context c = this;
-        // Add  listeners etc here
-        View eView = exampleLayoutRenderable.getView();
-        eView.setOnTouchListener((v, event) -> {
-            Toast.makeText(
-                    c, "Location marker touched.", Toast.LENGTH_LONG)
-                    .show();
-            return false;
-        });
-
-        return base;
-    }
 
 
     /**
