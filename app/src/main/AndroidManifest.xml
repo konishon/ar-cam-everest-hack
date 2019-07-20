@@ -29,6 +29,7 @@
         <activity android:name=".navigate.ShareLocationActivity" />
         <activity android:name=".compass.CompassActivity" />
         <activity android:name=".ar.LocationActivity" />
+        <activity android:name=".ar.ARCompassActivity" />
     </application>
 
 </manifest>

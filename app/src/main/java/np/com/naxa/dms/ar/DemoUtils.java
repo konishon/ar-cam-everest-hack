@@ -93,6 +93,7 @@ public class DemoUtils {
       session = new Session(activity);
       // IMPORTANT!!!  ArSceneView needs to use the non-blocking update mode.
       Config config = new Config(session);
+      config.setFocusMode(Config.FocusMode.AUTO);
       config.setUpdateMode(Config.UpdateMode.LATEST_CAMERA_IMAGE);
       session.configure(config);
     }

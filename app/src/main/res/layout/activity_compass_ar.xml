@@ -1,0 +1,24 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ar.LocationActivity">
+
+    <com.google.ar.sceneform.ArSceneView
+        android:id="@+id/ar_scene_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="top"/>
+
+    <ImageView
+        android:id="@+id/main_image_hands"
+        android:layout_width="20dp"
+        android:layout_height="240dp"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/compass_hands"
+        android:scaleType="fitXY"
+        android:src="@drawable/hands" />
+
+</RelativeLayout>

@@ -71,8 +71,6 @@ public class LocationActivity extends AppCompatActivity {
 
 
     @Override
-    @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
-    // CompletableFuture requires api level 24
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sceneform);
@@ -84,6 +82,29 @@ public class LocationActivity extends AppCompatActivity {
                         .setView(this, R.layout.ar_overlay_layout)
                         .build();
 
+        CompletableFuture.allOf(
+                exampleLayout)
+                .handle(
+                        (notUsed, throwable) -> {
+                            // When you build a Renderable, Sceneform loads its resources in the background while
+                            // returning a CompletableFuture. Call handle(), thenAccept(), or check isDone()
+                            // before calling get().
+
+                            if (throwable != null) {
+                                DemoUtils.displayError(this, "Unable to load renderables", throwable);
+                                return null;
+                            }
+
+                            try {
+                                exampleLayoutRenderable = exampleLayout.get();
+                                hasFinishedLoading = true;
+
+                            } catch (InterruptedException | ExecutionException ex) {
+                                DemoUtils.displayError(this, "Unable to load renderables", ex);
+                            }
+
+                            return null;
+                        });
 
         // Set an update listener on the Scene that will hide the loading message once a Plane is
         // detected.
@@ -105,8 +126,8 @@ public class LocationActivity extends AppCompatActivity {
                             // Now lets create our location markers.
                             // First, a layout
                             LocationMarker layoutLocationMarker = new LocationMarker(
-                                    -4.849509,
-                                    42.814603,
+                                    85.32207720,
+                                    27.71104830,
                                     getExampleView()
                             );
 
@@ -123,12 +144,7 @@ public class LocationActivity extends AppCompatActivity {
                             // Adding the marker
                             locationScene.mLocationMarkers.add(layoutLocationMarker);
 
-                            // Adding a simple location marker of a 3D model
-                            locationScene.mLocationMarkers.add(
-                                    new LocationMarker(
-                                            -0.119677,
-                                            51.478494,
-                                            getAndy()));
+
                         }
 
                         Frame frame = arSceneView.getArFrame();
@@ -180,22 +196,6 @@ public class LocationActivity extends AppCompatActivity {
         return base;
     }
 
-    /***
-     * Example Node of a 3D model
-     *
-     * @return
-     */
-    private Node getAndy() {
-        Node base = new Node();
-        base.setRenderable(andyRenderable);
-        Context c = this;
-        base.setOnTapListener((v, event) -> {
-            Toast.makeText(
-                    c, "Andy touched.", Toast.LENGTH_LONG)
-                    .show();
-        });
-        return base;
-    }
 
     /**
      * Make sure we call locationScene.resume();

@@ -6,18 +6,11 @@ import android.location.Location;
 
 import androidx.lifecycle.AndroidViewModel;
 
-
 import javax.inject.Inject;
-
-import io.reactivex.Flowable;
-import io.reactivex.functions.Consumer;
 
 public class ShareLocationViewModel extends AndroidViewModel {
 
-    private Location mLastLocation;
-    private Flowable<Location> mLocationUpdatesObserver;
-    Locator locator;
-
+    private Locator locator;
 
     @Inject
     public ShareLocationViewModel(Application application) {
@@ -27,11 +20,10 @@ public class ShareLocationViewModel extends AndroidViewModel {
     }
 
 
-    public void geLocationUpdates(Locator.Listener callback) {
+    void geLocationUpdates(Locator.Listener callback) {
         this.locator.getLocation(Locator.Method.GPS, new Locator.Listener() {
             @Override
             public void onLocationFound(Location location) {
-                mLastLocation = location;
                 callback.onLocationFound(location);
             }
 
@@ -42,11 +34,6 @@ public class ShareLocationViewModel extends AndroidViewModel {
         });
     }
 
-
-
-    public Location getLastCachedLocation() {
-        return mLastLocation;
-    }
 
 }
 
