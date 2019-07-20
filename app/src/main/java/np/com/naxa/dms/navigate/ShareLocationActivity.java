@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import np.com.naxa.dms.App;
 import np.com.naxa.dms.R;
@@ -37,6 +38,7 @@ public class ShareLocationActivity extends AppCompatActivity {
     ViewModelFactory mViewModelFactory;
     ShareLocationViewModel mViewModel;
     private Runnable perodicTask = null;
+    private Disposable dis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class ShareLocationActivity extends AppCompatActivity {
     }
 
     private void subcribeToLocationUpdatePerodic() {
-        Observable.interval(1, TimeUnit.SECONDS)
+        dis = Observable.interval(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(new Consumer<Long>() {
                     @Override
@@ -88,12 +90,7 @@ public class ShareLocationActivity extends AppCompatActivity {
                         subscribeToLocationUpdate();
                     }
                 }).subscribe();
-    }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
     }
 
@@ -101,7 +98,9 @@ public class ShareLocationActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        perodicTask = null;
+        if(!dis.isDisposed()){
+            dis.dispose();
+        }
     }
 
     private void subscribeToLocationUpdate() {

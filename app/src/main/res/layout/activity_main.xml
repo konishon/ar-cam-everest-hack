@@ -7,8 +7,14 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_compass"
-        android:text="compass"
+        android:id="@+id/btn_normal_compass"
+        android:text="Normal compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_location_compass"
+        android:text="Location compass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
