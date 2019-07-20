@@ -8,6 +8,11 @@ import android.hardware.SensorManager;
 
 public class Compass implements SensorEventListener {
     private static final String TAG = "Compass";
+    private float adjustedAzimuth;
+
+    public void adjustAzimuth(float adjustedAzimuth) {
+        this.adjustedAzimuth = adjustedAzimuth;
+    }
 
     public interface CompassListener {
         void onNewAzimuth(float azimuth);
