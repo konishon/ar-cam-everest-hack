@@ -4,8 +4,9 @@
     package="np.com.naxa.dms">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
 
     <application
         android:name=".App"
@@ -16,6 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <meta-data android:name="com.google.ar.core" android:value="required" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +28,7 @@
         </activity>
         <activity android:name=".navigate.ShareLocationActivity" />
         <activity android:name=".compass.CompassActivity" />
+        <activity android:name=".ar.LocationActivity" />
     </application>
 
 </manifest>

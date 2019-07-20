@@ -12,4 +12,5 @@
     <string name="sotw_northwest">NW</string>
     <string name="sotw_southeast">SE</string>
     <string name="sotw_southwest">SW</string>
+    <string name="plane_finding">Searching for surfaces&#8230;</string>
 </resources>
