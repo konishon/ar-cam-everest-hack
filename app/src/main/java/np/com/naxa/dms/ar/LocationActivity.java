@@ -20,6 +20,7 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import np.com.naxa.dms.R;
+import timber.log.Timber;
 import uk.co.appoly.arcorelocation.LocationMarker;
 import uk.co.appoly.arcorelocation.LocationScene;
 import uk.co.appoly.arcorelocation.rendering.LocationNode;
@@ -126,8 +128,7 @@ public class LocationActivity extends AppCompatActivity {
                             // Now lets create our location markers.
                             // First, a layout
                             LocationMarker layoutLocationMarker = new LocationMarker(
-                                    85.32207720,
-                                    27.71104830,
+                                    85.322371, 27.706698,
                                     getExampleView()
                             );
 
@@ -137,6 +138,9 @@ public class LocationActivity extends AppCompatActivity {
                                 @Override
                                 public void render(LocationNode node) {
                                     View eView = exampleLayoutRenderable.getView();
+                                    Timber.i("Height: %s Width: %s", eView.getHeight(), eView.getWidth());
+                                    int[] heightWidth = mapDistanceToHeightWidht(node.getDistance());
+                                    eView.setLayoutParams(new LinearLayout.LayoutParams(heightWidth[0], heightWidth[1]));
                                     TextView distanceTextView = eView.findViewById(R.id.textView2);
                                     distanceTextView.setText(node.getDistance() + "M");
                                 }
@@ -174,6 +178,36 @@ public class LocationActivity extends AppCompatActivity {
         // Lastly request CAMERA & fine location permission which is required by ARCore-Location.
         ARLocationPermissionHelper.requestPermission(this);
     }
+
+    private int[] mapDistanceToHeightWidht(int distance) {
+        int[] heightWidht = new int[2];
+        if (distance <= 50) {
+            heightWidht[0] = 394;
+            heightWidht[1] = 394;
+
+        } else if (distance <= 150) {
+            heightWidht[0] = 344;
+            heightWidht[1] = 344;
+
+        } else if (distance <= 250) {
+            heightWidht[0] = 294;
+            heightWidht[1] = 294;
+
+        } else if (distance <= 350) {
+            heightWidht[0] = 244;
+            heightWidht[1] = 244;
+
+        } else if (distance <= 450) {
+            heightWidht[0] = 194;
+            heightWidht[1] = 194;
+
+        } else {
+            heightWidht[0] = 144;
+            heightWidht[1] = 144;
+        }
+        return heightWidht;
+    }
+
 
     /**
      * Example node of a layout
