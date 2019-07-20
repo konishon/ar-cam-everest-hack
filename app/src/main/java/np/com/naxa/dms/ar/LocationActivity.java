@@ -20,8 +20,6 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -52,10 +50,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import np.com.naxa.dms.R;
 import timber.log.Timber;
-import uk.co.appoly.arcorelocation.LocationMarker;
 import uk.co.appoly.arcorelocation.LocationScene;
-import uk.co.appoly.arcorelocation.rendering.LocationNode;
-import uk.co.appoly.arcorelocation.rendering.LocationNodeRender;
 import uk.co.appoly.arcorelocation.utils.ARLocationPermissionHelper;
 
 /**
@@ -138,34 +133,9 @@ public class LocationActivity extends AppCompatActivity {
                                 }
                             }).flatMapIterable((Function<ArrayList<PointOfInterest>, Iterable<PointOfInterest>>) pointOfInterests -> pointOfInterests)
                                     .subscribe(pointOfInterest -> {
-                                        LocationMarker layoutLocationMarker = new LocationMarker(
-                                                pointOfInterest.getLon(), pointOfInterest.getLat(),
-                                                getExampleView()
-                                        );
-
-                                        Timber.i("Plotting %s on camera",pointOfInterest.getLabel());
-
-                                        layoutLocationMarker.setRenderEvent(new LocationNodeRender() {
-                                            @Override
-                                            public void render(LocationNode node) {
-                                                View eView = exampleLayoutRenderable.getView();
-                                                Timber.i("Height: %s Width: %s", eView.getHeight(), eView.getWidth());
-                                                int[] heightWidth = mapDistanceToHeightWidht(node.getDistance());
-                                                eView.setLayoutParams(new LinearLayout.LayoutParams(heightWidth[0], heightWidth[1]));
-                                                TextView distanceTextView = eView.findViewById(R.id.textView2);
-                                                TextView labelTextView = eView.findViewById(R.id.textView);
-                                                labelTextView.setText(pointOfInterest.getLabel());
-                                                distanceTextView.setText(node.getDistance() + "M");
-                                            }
-                                        });
-                                        // Adding the marker
-                                        locationScene.mLocationMarkers.add(layoutLocationMarker);
-                                    }, new Consumer<Throwable>() {
-                                        @Override
-                                        public void accept(Throwable throwable) throws Exception {
-                                            Timber.e(throwable);
-                                        }
-                                    });
+                                        Marker.render(LocationActivity.this, pointOfInterest, locationScene);
+//
+                                    }, throwable -> Timber.e(throwable));
 
 
                         }
