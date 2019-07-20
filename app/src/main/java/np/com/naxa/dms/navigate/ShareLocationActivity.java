@@ -3,6 +3,7 @@ package np.com.naxa.dms.navigate;
 import android.annotation.SuppressLint;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import np.com.naxa.dms.App;
 import np.com.naxa.dms.R;
 import np.com.naxa.dms.ViewModelFactory;
@@ -30,13 +36,14 @@ public class ShareLocationActivity extends AppCompatActivity {
     @Inject
     ViewModelFactory mViewModelFactory;
     ShareLocationViewModel mViewModel;
+    private Runnable perodicTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_location);
 
-         mTextLatLng = findViewById(R.id.text_curr_latlng);
+        mTextLatLng = findViewById(R.id.text_curr_latlng);
         ((App) getApplication()).getAppComponent().inject(this);
         initViewModel();
     }
@@ -45,7 +52,7 @@ public class ShareLocationActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (Util.checkLocationPermission(this)) {
-            subscribeToLocationUpdate();
+            subcribeToLocationUpdatePerodic();
         }
     }
 
@@ -65,19 +72,40 @@ public class ShareLocationActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (Util.checkLocationPermissionsResult(requestCode, permissions, grantResults)) {
-            subscribeToLocationUpdate();
+            subcribeToLocationUpdatePerodic();
         } else {
             Toast.makeText(this, "Please grant permission to this app",
                     Toast.LENGTH_LONG).show();
         }
     }
 
+    private void subcribeToLocationUpdatePerodic() {
+        Observable.interval(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        subscribeToLocationUpdate();
+                    }
+                }).subscribe();
+    }
 
-    public void onBroadcastBtnClick(View view) {
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        perodicTask = null;
+    }
+
     private void subscribeToLocationUpdate() {
+
         mViewModel.geLocationUpdates(new Locator.Listener() {
             @Override
             public void onLocationFound(Location location) {

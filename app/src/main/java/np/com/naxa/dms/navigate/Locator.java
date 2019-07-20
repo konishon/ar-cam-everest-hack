@@ -45,7 +45,7 @@ public class Locator implements LocationListener {
     static private final String LOG_TAG = "locator";
 
     static private final int TIME_INTERVAL = 100; // minimum time between updates in milliseconds
-    static private final int DISTANCE_INTERVAL = 1; // minimum distance between updates in meters
+    static private final int DISTANCE_INTERVAL = 0; // minimum distance between updates in meters
 
     static public enum Method {
         NETWORK,
@@ -97,7 +97,7 @@ public class Locator implements LocationListener {
         if (this.locationManager.isProviderEnabled(provider)) {
             if (provider.contentEquals(LocationManager.NETWORK_PROVIDER)
                     && Connectivity.isConnected(this.context)) {
-                Log.d(LOG_TAG, "Network connected, start listening : " + provider);
+                Timber.d("Network connected, start listening : " + provider);
                 this.locationManager.requestLocationUpdates(provider, TIME_INTERVAL, DISTANCE_INTERVAL, this);
             } else if (provider.contentEquals(LocationManager.GPS_PROVIDER)
                     && Connectivity.isConnectedMobile(this.context)) {
