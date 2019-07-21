@@ -32,7 +32,7 @@
         <activity android:name=".compass.CompassActivity" />
         <activity android:name=".ar.ARCompassActivity" />
 
-        <activity android:name=".ar.ARMarkerActivity">
+        <activity android:name=".maps.MapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".maps.MapActivity"
+            android:name=".ar.ARMarkerActivity"
             android:exported="true" />
     </application>
 
