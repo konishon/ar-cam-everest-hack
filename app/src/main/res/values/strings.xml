@@ -13,4 +13,5 @@
     <string name="sotw_southeast">SE</string>
     <string name="sotw_southwest">SW</string>
     <string name="plane_finding">Searching for surfaces&#8230;</string>
+    <string name="msg_move_camera">Move camera around to find open spaces</string>
 </resources>

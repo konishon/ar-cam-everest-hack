@@ -21,8 +21,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.Frame;
@@ -38,12 +40,15 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ViewRenderable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import np.com.naxa.dms.R;
 import timber.log.Timber;
@@ -62,6 +67,8 @@ public class ARMarkerActivity extends AppCompatActivity {
 
     private ArSceneView arSceneView;
 
+
+
     // Renderables for this example
     private ModelRenderable andyRenderable;
     private ViewRenderable exampleLayoutRenderable;
@@ -70,11 +77,17 @@ public class ARMarkerActivity extends AppCompatActivity {
     private LocationScene locationScene;
 
 
+    private void showMessage(String message) {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sceneform);
         arSceneView = findViewById(R.id.ar_scene_view);
+
+
 
         // Build a renderable from a 2D View.
         CompletableFuture<ViewRenderable> exampleLayout =
@@ -123,16 +136,27 @@ public class ARMarkerActivity extends AppCompatActivity {
                             // We know that here, the AR components have been initiated.
                             locationScene = new LocationScene(ARMarkerActivity.this, arSceneView);
 
-                            Disposable disposable = Observable.fromCallable(new Callable<ArrayList<PointOfInterest>>() {
-                                @Override
-                                public ArrayList<PointOfInterest> call() throws Exception {
-                                    return DataGenerator.getData();
-                                }
-                            }).flatMapIterable((Function<ArrayList<PointOfInterest>, Iterable<PointOfInterest>>) pointOfInterests -> pointOfInterests)
+                            Disposable disposable = Observable
+                                    .fromCallable(new Callable<ArrayList<PointOfInterest>>() {
+                                        @Override
+                                        public ArrayList<PointOfInterest> call() throws Exception {
+                                            return DataGenerator.getData();
+                                        }
+                                    })
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .doOnNext(new Consumer<ArrayList<PointOfInterest>>() {
+                                        @Override
+                                        public void accept(ArrayList<PointOfInterest> pointOfInterests) throws Exception {
+                                            showMessage(String.format("%s open spaces found", pointOfInterests.size()));
+
+                                        }
+                                    })
+                                    .flatMapIterable((Function<ArrayList<PointOfInterest>, Iterable<PointOfInterest>>) pointOfInterests -> pointOfInterests)
                                     .subscribe(pointOfInterest -> {
                                         Marker.render(ARMarkerActivity.this, pointOfInterest, locationScene);
-//
-                                    }, throwable -> Timber.e(throwable));
+
+
+                                    }, Timber::e);
 
 
                         }
@@ -164,8 +188,6 @@ public class ARMarkerActivity extends AppCompatActivity {
         // Lastly request CAMERA & fine location permission which is required by ARCore-Location.
         ARLocationPermissionHelper.requestPermission(this);
     }
-
-
 
 
     /**
