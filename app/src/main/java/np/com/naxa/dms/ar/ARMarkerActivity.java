@@ -16,6 +16,7 @@
 package np.com.naxa.dms.ar;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -65,6 +66,7 @@ import np.com.naxa.dms.ViewModelFactory;
 import np.com.naxa.dms.common.Util;
 import np.com.naxa.dms.compass.Compass;
 import np.com.naxa.dms.compass.SOTWFormatter;
+import np.com.naxa.dms.maps.MapActivity;
 import np.com.naxa.dms.navigate.CustomBearingCompassActivity;
 import np.com.naxa.dms.navigate.CustomBearingCompassViewmodel;
 import np.com.naxa.dms.navigate.Locator;
@@ -118,6 +120,14 @@ public class ARMarkerActivity extends AppCompatActivity {
         sotwLabel = findViewById(R.id.sotw_label);
         setupCompass();
 
+
+        findViewById(R.id.fab_to_map).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ARMarkerActivity.this, MapActivity.class));
+                finish();
+            }
+        });
 
         // Build a renderable from a 2D View.
         CompletableFuture<ViewRenderable> exampleLayout =
@@ -287,7 +297,6 @@ public class ARMarkerActivity extends AppCompatActivity {
         }
         Timber.d("LocationUpdateErr: %s", t.toString());
     }
-
 
 
     @Override
