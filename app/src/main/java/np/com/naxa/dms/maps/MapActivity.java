@@ -22,11 +22,17 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import np.com.naxa.dms.MainActivity;
 import np.com.naxa.dms.R;
+import np.com.naxa.dms.Utils;
 import np.com.naxa.dms.ar.ARMarkerActivity;
+import np.com.naxa.dms.common.Util;
 
 public class MapActivity extends AppCompatActivity implements PermissionsListener {
     private MapView mapView;
@@ -52,9 +58,22 @@ public class MapActivity extends AppCompatActivity implements PermissionsListene
                     }
                 });
 
-                mapboxMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(48.85819, 2.29458))
-                        .title("Eiffel Tower"));
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(Utils.data);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        mapboxMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(jsonObject.optDouble("lat"), jsonObject.optDouble("long")))
+                                .title(jsonObject.optString("name")));
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
