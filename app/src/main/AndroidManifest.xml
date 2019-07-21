@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="np.com.naxa.dms">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-feature
+        android:name="android.hardware.camera.ar"
+        android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -18,23 +21,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <meta-data android:name="com.google.ar.core" android:value="required" />
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="required" />
 
         <activity android:name=".HelpMainActivity">
+
+        </activity>
+        <activity android:name=".navigate.CustomBearingCompassActivity" />
+        <activity android:name=".compass.CompassActivity" />
+        <activity android:name=".ar.ARCompassActivity" />
+
+        <activity android:name=".ar.ARMarkerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".navigate.CustomBearingCompassActivity" />
-        <activity android:name=".compass.CompassActivity" />
-        <activity android:name=".ar.ARMarkerActivity" />
-
-        <activity android:name=".ar.ARCompassActivity" />
         <activity
-            android:exported="true"
-            android:name=".maps.MapActivity" />
+            android:name=".maps.MapActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import np.com.naxa.dms.HelpMainActivity;
 import np.com.naxa.dms.MainActivity;
 import np.com.naxa.dms.R;
 import np.com.naxa.dms.Utils;
@@ -81,6 +82,14 @@ public class MapActivity extends AppCompatActivity implements PermissionsListene
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MapActivity.this, ARMarkerActivity.class));
+                finish();
+            }
+        });
+
+        findViewById(R.id.fab_to_list).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MapActivity.this, HelpMainActivity.class));
                 finish();
             }
         });

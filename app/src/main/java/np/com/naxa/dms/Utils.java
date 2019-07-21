@@ -84,9 +84,29 @@ public class Utils {
             "    },\n" +
             "    {\n" +
             "        \"distance\": \"3.820km\",\n" +
+            "        \"name\": \"Tudikhel\",\n" +
+            "        \"lat\": 27.703102,\n" +
+            "        \"long\": 85.315183,\n" +
+            "        \"id\": 400,\n" +
+            "        \"address\": null,\n" +
+            "        \"location\": \"SRID=4326;POINT (85.35478980000001 27.69884452)\",\n" +
+            "        \"city\": null\n" +
+            "    },\n" +
+            "    {\n" +
+            "        \"distance\": \"3.820km\",\n" +
             "        \"name\": \"Solar poles\",\n" +
             "        \"lat\": 27.69884452,\n" +
             "        \"long\": 85.3547898,\n" +
+            "        \"id\": 263,\n" +
+            "        \"address\": null,\n" +
+            "        \"location\": \"SRID=4326;POINT (85.35478980000001 27.69884452)\",\n" +
+            "        \"city\": null\n" +
+            "    },\n" +
+            "    {\n" +
+            "        \"distance\": \"3.820km\",\n" +
+            "        \"name\": \"Garden Of Dreams\",\n" +
+            "        \"lat\": 27.7130589,\n" +
+            "        \"long\": 85.316321,\n" +
             "        \"id\": 263,\n" +
             "        \"address\": null,\n" +
             "        \"location\": \"SRID=4326;POINT (85.35478980000001 27.69884452)\",\n" +
