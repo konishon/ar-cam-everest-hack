@@ -42,6 +42,7 @@ public class HelpMainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_main);
+        setSupportActionBar(findViewById(R.id.mtoolbar));
         // get the list of open spaces
         retrofit = RetrofitGenerator.instance();
 
