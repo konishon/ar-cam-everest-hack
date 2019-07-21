@@ -1,6 +1,8 @@
 package np.com.naxa.dms.ar;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,6 +17,10 @@ import java.util.concurrent.CompletableFuture;
 import np.com.naxa.dms.R;
 import uk.co.appoly.arcorelocation.LocationMarker;
 import uk.co.appoly.arcorelocation.LocationScene;
+
+/**
+ * https://github.com/appoly/ARCore-Location/issues/20
+ */
 
 public class Marker {
 
@@ -70,6 +76,7 @@ public class Marker {
                                 });
 
                                 locationScene.mLocationMarkers.add(couponLocationMarker);
+
 
                             } catch (Exception ex) {
                                 ex.printStackTrace();

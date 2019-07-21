@@ -26,9 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".navigate.ShareLocationActivity" />
+        <activity android:name=".navigate.CustomBearingCompassActivity" />
         <activity android:name=".compass.CompassActivity" />
         <activity android:name=".ar.ARMarkerActivity" />
+
         <activity android:name=".ar.ARCompassActivity" />
     </application>
 

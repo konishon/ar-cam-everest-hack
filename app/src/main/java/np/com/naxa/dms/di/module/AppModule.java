@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import np.com.naxa.dms.ViewModelFactory;
-import np.com.naxa.dms.navigate.ShareLocationViewModel;
+import np.com.naxa.dms.navigate.CustomBearingCompassViewmodel;
 
 @Module
 public class AppModule {
@@ -29,14 +29,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ShareLocationViewModel provideTrackLocationViewModel() {
-        return new ShareLocationViewModel(mApplication);
+    CustomBearingCompassViewmodel provideTrackLocationViewModel() {
+        return new CustomBearingCompassViewmodel(mApplication);
     }
 
     @Provides
     @Singleton
     ViewModelFactory provideViewModelFactory(
-            ShareLocationViewModel shareLocationViewModel) {
+            CustomBearingCompassViewmodel shareLocationViewModel) {
         return new ViewModelFactory(shareLocationViewModel);
     }
 

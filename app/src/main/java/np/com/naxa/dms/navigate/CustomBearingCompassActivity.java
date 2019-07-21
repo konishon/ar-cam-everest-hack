@@ -30,12 +30,12 @@ import np.com.naxa.dms.compass.Compass;
 import np.com.naxa.dms.compass.SOTWFormatter;
 import timber.log.Timber;
 
-public class ShareLocationActivity extends AppCompatActivity {
+public class CustomBearingCompassActivity extends AppCompatActivity {
 
     TextView mTextLatLng;
     @Inject
     ViewModelFactory mViewModelFactory;
-    ShareLocationViewModel mViewModel;
+    CustomBearingCompassViewmodel mViewModel;
     private Runnable perodicTask = null;
     private Disposable dis;
 
@@ -170,7 +170,7 @@ public class ShareLocationActivity extends AppCompatActivity {
     private void onLocationUpdateError(Throwable t) {
         if (t instanceof SecurityException) {
             // Access to coarse or fine location are not allowed by the user
-            Util.checkLocationPermission(ShareLocationActivity.this);
+            Util.checkLocationPermission(CustomBearingCompassActivity.this);
         }
         Timber.d("LocationUpdateErr: %s", t.toString());
     }
@@ -178,7 +178,7 @@ public class ShareLocationActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void initViewModel() {
-        mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(ShareLocationViewModel.class);
+        mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(CustomBearingCompassViewmodel.class);
 
     }
 

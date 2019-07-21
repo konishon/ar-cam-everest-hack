@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
+    android:padding="@dimen/activity_horizontal_margin"
     android:layout_height="150dp"
     android:alpha="0.93"
-    android:background="#a70a04"
-    android:orientation="vertical"
-    >
+    android:background="#4CAF50"
+    android:orientation="vertical">
 
     <TextView
+
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +20,5 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#fff"
-         />
+        android:textColor="#fff" />
 </LinearLayout>

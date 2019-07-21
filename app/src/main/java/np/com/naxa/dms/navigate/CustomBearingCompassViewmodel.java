@@ -8,19 +8,19 @@ import androidx.lifecycle.AndroidViewModel;
 
 import javax.inject.Inject;
 
-public class ShareLocationViewModel extends AndroidViewModel {
+public class CustomBearingCompassViewmodel extends AndroidViewModel {
 
     private Locator locator;
 
     @Inject
-    public ShareLocationViewModel(Application application) {
+    public CustomBearingCompassViewmodel(Application application) {
         super(application);
         this.locator = new Locator(application);
 
     }
 
 
-    void geLocationUpdates(Locator.Listener callback) {
+    public void geLocationUpdates(Locator.Listener callback) {
         this.locator.getLocation(Locator.Method.GPS, new Locator.Listener() {
             @Override
             public void onLocationFound(Location location) {
