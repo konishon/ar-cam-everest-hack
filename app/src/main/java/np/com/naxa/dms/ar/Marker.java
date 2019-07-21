@@ -69,10 +69,10 @@ public class Marker {
                                 couponLocationMarker.setRenderEvent(node -> {
                                     View eView = vr.getView();
                                     TextView distanceTextView = eView.findViewById(R.id.textView2);
-                                    int[] heightWidht = mapDistanceToHeightWidht(node.getDistance());
-                                    vr.getView().setLayoutParams(new LinearLayout.LayoutParams(heightWidht[0], heightWidht[1]));
+//                                    int[] heightWidht = mapDistanceToHeightWidht(node.getDistance());
+//                                    vr.getView().setLayoutParams(new LinearLayout.LayoutParams(heightWidht[0], heightWidht[1]));
 
-                                    distanceTextView.setText(Math.round(node.getDistance()) + "M");
+                                    distanceTextView.setText(Math.round(node.getDistance()) + "M away");
                                 });
 
                                 locationScene.mLocationMarkers.add(couponLocationMarker);
@@ -87,9 +87,9 @@ public class Marker {
 
     private static int[] mapDistanceToHeightWidht(int distance) {
         int[] heightWidht = new int[2];
-        if (distance <= 50) {
-            heightWidht[0] = 394;
-            heightWidht[1] = 394;
+        if (true) {
+            heightWidht[0] = 300;
+            heightWidht[1] = 300;
 
         } else if (distance <= 150) {
             heightWidht[0] = 344;
