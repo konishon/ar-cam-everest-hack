@@ -21,8 +21,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_list_black_24dp" />
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_camera_alt_black_24dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_to_list"
@@ -33,7 +33,7 @@
         android:layout_margin="24dp"
 
         android:layout_toStartOf="@id/fab_to_camera"
-        android:src="@drawable/ic_camera_alt_black_24dp"
+        android:src="@drawable/ic_list_black_24dp"
         mapbox:fabSize="mini" />
 
 </RelativeLayout>
