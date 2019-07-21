@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 
 public final class Util {
 
-    private static final int REQ_PERM_CODE = 9874;
+    public static final int REQ_PERM_CODE = 9874;
 
     public static boolean checkLocationPermission(Activity activity) {
         // check permission untuk lokasi (fine/coarse)

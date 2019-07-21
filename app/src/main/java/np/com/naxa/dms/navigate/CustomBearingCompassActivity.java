@@ -103,12 +103,17 @@ public class CustomBearingCompassActivity extends AppCompatActivity {
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (Util.checkLocationPermissionsResult(requestCode, permissions, grantResults)) {
-            subcribeToLocationUpdatePerodic();
-        } else {
-            Toast.makeText(this, "Please grant permission to this app",
-                    Toast.LENGTH_LONG).show();
+        switch (requestCode) {
+            case Util.REQ_PERM_CODE:
+                if (Util.checkLocationPermissionsResult(requestCode, permissions, grantResults)) {
+                    subcribeToLocationUpdatePerodic();
+                } else {
+                    Toast.makeText(this, "Please grant permission to this app",
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
         }
+
     }
 
     private void subcribeToLocationUpdatePerodic() {
