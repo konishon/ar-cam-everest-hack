@@ -45,6 +45,7 @@ public class HelpMainActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.mtoolbar));
         // get the list of open spaces
         retrofit = RetrofitGenerator.instance();
+        setTitle("Nearby openspaces");
 
 
         Locator locator = new Locator(this);
