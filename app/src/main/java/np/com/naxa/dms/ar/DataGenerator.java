@@ -1,10 +1,15 @@
 package np.com.naxa.dms.ar;
 
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import np.com.naxa.dms.Utils;
 
 public class DataGenerator {
     static String data = "[{\n" +
@@ -50,5 +55,27 @@ public class DataGenerator {
         }
 
         return pointOfInterests;
+    }
+
+
+    public static ArrayList<PointOfInterest> getDataNew() throws JSONException {
+        JSONArray jsonArray = new JSONArray(Utils.data);
+        ArrayList<PointOfInterest> pointOfInterests = new ArrayList<>();
+        PointOfInterest pointOfInterest = null;
+        for (int i = 0; i < jsonArray.length(); i++) {
+
+            JSONObject obj = jsonArray.getJSONObject(i);
+            String label = obj.getString("name");
+            double lat = obj.getDouble("lat");
+            double lon = obj.getDouble("long");
+
+            pointOfInterest = new PointOfInterest(lat, lon, label);
+            pointOfInterests.add(pointOfInterest);
+
+        }
+
+        return pointOfInterests;
+
+
     }
 }

@@ -180,7 +180,7 @@ public class ARMarkerActivity extends AppCompatActivity {
                                     .fromCallable(new Callable<ArrayList<PointOfInterest>>() {
                                         @Override
                                         public ArrayList<PointOfInterest> call() throws Exception {
-                                            return DataGenerator.getData();
+                                            return DataGenerator.getDataNew();
                                         }
                                     })
                                     .observeOn(AndroidSchedulers.mainThread())
